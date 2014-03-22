@@ -10,7 +10,7 @@ This ansible role deploys xl2tpd over IPsec (client) for Ubuntu 12.04 (tested on
 
 ##How to install
 * Use github to clone/fork in your role directory
-* ansible galaxy ```ansible-galaxy install adham.helal.ansible-l2tp_ipsec ```
+* ansible galaxy ```ansible-galaxy install adham.helal.l2tp_ipsec```
 
 ##Variables 
   All the default variables are located **defaults/main.yml**. Mostly you would need to configure the following variables. 
