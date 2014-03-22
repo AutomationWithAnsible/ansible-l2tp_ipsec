@@ -1,7 +1,6 @@
 [![Build Status](https://travis-ci.org/ahelal/ansible-l2tp_ipsec.svg?branch=master)](https://travis-ci.org/ahelal/ansible-l2tp_ipsec)
 
 #Readme
-
 This ansible role deploys xl2tpd over IPsec (client) for Ubuntu 12.04 (tested on vagrant)
 
 ##Prerequisite
