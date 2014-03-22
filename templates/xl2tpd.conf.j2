@@ -1,0 +1,17 @@
+[global]
+;ipsec saref = yes
+ipsec saref = no
+debug tunnel = yes
+debug avp = yes
+debug network = yes
+debug state = yes
+
+[lac {{lac_name}}]
+lns = {{vpn_server}}
+refuse chap = yes 
+refuse pap = yes 
+require authentication = yes 
+name = vpn-serve
+ppp debug = yes
+pppoptfile = /etc/ppp/options.l2tpd.client
+length bit = yes

@@ -1,0 +1,20 @@
+---
+- name: restart vpn
+  service: name=vpn-restart state=restarted 
+  notify: Check routing table 
+
+- name: Check routing table 
+  shell: ip route list {{item.subnet}} | grep {{item.gateway}}
+  register: route
+  failed_when : False
+  changed_when: False
+  tags: l2tp_ipsec_setup
+  with_items: vpn_routing
+  notify: Add to routing table
+
+# shell: echo "{{item.item.subnet}}-{{item.item.gateway}}"  >> /tmp/file
+- name: Add to routing table
+  shell: ip route add {{item.item.subnet}} via {{item.item.gateway}}
+  when: item.rc != 0
+  with_items: route.results
+  tags: l2tp_ipsec_setup

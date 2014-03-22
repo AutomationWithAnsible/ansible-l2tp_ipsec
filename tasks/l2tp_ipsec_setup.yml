@@ -1,0 +1,42 @@
+---
+# Adapted from http://www.elastichosts.com/support/tutorials/linux-l2tpipsec-vpn-client/
+
+- name: Install openswan xl2tpd
+  apt: name={{item}}
+       update_cache=yes
+  with_items:
+    - openswan
+    - xl2tpd
+  tags: l2tp_ipsec_setup
+
+- name: Deploy ipsec.conf
+  template: src=ipsec.conf.j2 
+            dest="/etc/ipsec.conf"
+  tags: l2tp_ipsec_setup
+  notify: restart vpn
+
+- name: Deploy ipsec.secrets
+  template: src=ipsec.secrets.j2 
+            dest="{{vpn_PSK_file}}"
+  tags: l2tp_ipsec_setup
+  notify: restart vpn
+
+- name: Deploy options.l2tpd
+  template: src=options.l2tpd.client.j2 
+            dest="/etc/ppp/options.l2tpd.client"
+  tags: l2tp_ipsec_setup
+  notify: restart vpn
+
+- name: Deploy otions.l2pd
+  template: src=xl2tpd.conf.j2 
+            dest="/etc/xl2tpd/xl2tpd.conf"
+  tags: l2tp_ipsec_setup
+  notify: restart vpn
+
+- name: Deploy vpn-restart
+  template: src=vpn-restart.sh.j2 
+            dest="/etc/init.d/vpn-restart"
+            mode=0755
+  tags: l2tp_ipsec_setup
+  notify: restart vpn
+

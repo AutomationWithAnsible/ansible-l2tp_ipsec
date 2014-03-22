@@ -1,0 +1,21 @@
+---
+#to test log on http://toyvpn.com/
+vpn_server   : "it.toyvpn.com"
+vpn_PSK      : "toyvpn.com"
+vpn_username : "freeit"
+vpn_password : "74158689"
+
+##Routing array of subnets and gateway 
+vpn_routing:
+   - subnet   : "10.224.24.00/22"
+     gateway  : "it.toyvpn.com"
+#   - subnet   : "192.168.55.0/32"
+#     gateway  : "10.55.55.4"
+
+
+##Optional variables
+vpn_desc     : "Custom vpn connection"
+vpn_PSK_file : /var/lib/openswan/ipsec.secrets.inc
+
+vpn_conn     : "L2TP-PSK-noNAT"
+lac_name     : "vpn-connection"

@@ -1,0 +1,24 @@
+# 
+# basic configuration
+config setup
+    nat_traversal=yes
+    oe=off
+    protostack=netkey
+    
+
+conn {{vpn_conn}}
+    authby=secret
+    pfs=no
+    auto=add
+    keyingtries=3
+    dpddelay=30
+    dpdtimeout=120
+    dpdaction=clear
+    rekey=yes
+    ikelifetime=8h
+    keylife=1h
+    type=transport
+    left=%defaultroute
+    leftnexthop=%defaultroute
+    leftprotoport=17/1701
+    right={{vpn_server}}

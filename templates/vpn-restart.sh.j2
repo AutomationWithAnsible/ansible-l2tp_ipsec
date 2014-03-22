@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#TODO: Convert to init.d script
+
+#Restart ipsec
+service ipsec restart 
+ipsec_ret="$?"
+
+#Restart xl2tpd
+service xl2tpd restart 
+xl2tpd_ret="$?"
+
+#Enable ipsec
+ipsec auto --up {{vpn_conn}}
+ipsecauto_ret="$?"
+
+#conect
+echo "c {{lac_name}}" > /var/run/xl2tpd/l2tp-control 
+ipsececho_ret="$?"
+
+sleep 5
+
+ping -c 4 {{vpn_server}}
+ping_ret="$?"
+
+exit $ipsec_ret || $xl2tpd_ret || $ipsecauto_ret || $ipsececho_ret || $ping_ret
